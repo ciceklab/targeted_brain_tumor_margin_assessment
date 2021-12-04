@@ -1,5 +1,5 @@
 import sys 
-sys.path.insert(1, '/mnt/gunkaynar/refactor_dataset/cpmg/lib/pyNMR')
+sys.path.insert(1, '/Users/gunkaynar/Desktop/research/targeted_brain_tumor_margin_assessment/reproduce/lib/pyNMR')
 import nmrDataMod as ndm
 import numpy as np
 # process free induction decay(fid) data and create a spectrum similar to Topspin's output
@@ -13,7 +13,7 @@ def preprocess_spectrum(path):
     data.phase(2,3, phase)
     return (np.absolute(data.allFid[3][0])).T
 
-database = "/mnt/gunkaynar/eretic/pathologic_classification/control_tumor/scripts/pred_quant/toy_example/data"
+database = "/Users/gunkaynar/Desktop/research/targeted_brain_tumor_margin_assessment/reproduce/predict_with_your_data/models/control_tumor/FID_data"
 shift_ = -1515
 normalization_ = 1.6
 tumor_spectrum = []

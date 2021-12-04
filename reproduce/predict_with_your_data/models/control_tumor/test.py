@@ -1,4 +1,3 @@
-import os
 import joblib
 import pickle
 from load_test_data import labels_test, quant_test
@@ -17,9 +16,7 @@ test_data["X"] = quant_test
 test_data["X"] =  scaler.transform(test_data["X"])
 test_data["class_labels"] = np.transpose(labels_test)
 
-base = '/mnt/gunkaynar/eretic/pathologic_classification/control_tumor/'
-model_name = f"pred_quant/one_fold_RF/seed_35/"
-model_base_path = os.path.join(base, "models/"+model_name)
+
 model = pickle.load(open("control_tumor_model","rb"))
 
 
