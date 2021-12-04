@@ -149,7 +149,7 @@ pred_quant = np.zeros((dataset_len,37))
 
 quantifiers = []
 for name in metabolite_names:
-    state_dct = torch.load(os.path.join(model_load_base_path, f"{dataset2folder[name]}/seed_35/test_fold_0.pth"), map_location=device)
+    state_dct = torch.load(os.path.join(model_load_base_path, f"{dataset2folder[name]}/test_fold_0.pth"), map_location=device)
     quantifiers.append(Single_Metabolite_Model())
     quantifiers[-1].load_state_dict(state_dct)
     quantifiers[-1].eval()
