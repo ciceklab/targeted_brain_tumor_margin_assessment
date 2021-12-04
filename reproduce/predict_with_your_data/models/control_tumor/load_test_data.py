@@ -1,11 +1,6 @@
-import pdb
-import pickle
-import pandas as pd
 import os 
 import numpy as np
-import sys
 import matplotlib.pyplot as plt
-from scipy.sparse import data
 from utils import spectra_test, labels_test, dataset_len
 import torch
 import torch.nn as nn
@@ -15,7 +10,6 @@ device = torch.device("cpu")
 
 # convert from  a given ppm value (i.e. from -2 to 12 ppm) to spectrum scale (i.e. from 0 to 16313)
 def ppm_to_idx(ppm):
-    exact_idx = (ppm + 2) * 16314 / 14
     upper_idx = np.floor((ppm + 2.01) * 16314 / 14)
     lower_idx = np.ceil((ppm + 1.99) * 16314 / 14)
     return int(lower_idx), int(upper_idx)

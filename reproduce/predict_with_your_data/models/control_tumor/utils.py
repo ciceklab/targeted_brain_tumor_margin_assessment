@@ -2,7 +2,6 @@ import sys
 sys.path.insert(1, '/mnt/gunkaynar/refactor_dataset/cpmg/lib/pyNMR')
 import nmrDataMod as ndm
 import numpy as np
-import pdb
 # process free induction decay(fid) data and create a spectrum similar to Topspin's output
 def preprocess_spectrum(path):
     data = ndm.nmrData(path, "TopSpin")
