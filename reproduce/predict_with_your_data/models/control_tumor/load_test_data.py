@@ -1,22 +1,46 @@
+import pdb
 import pickle
+import pandas as pd
 import os 
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
-project_base_path = "/mnt/doruk/metabolite_quantification/glioma_quantification"
-current_path = "eretic/quantification/scripts/"
-sys.path.insert(1, os.path.join(project_base_path, current_path))
-from data_utils import spectrum2ppm
-from utils import spectra_test, labels_test
+from scipy.sparse import data
+from utils import spectra_test, labels_test, dataset_len
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 device = torch.device("cpu")
+
+
+# convert from  a given ppm value (i.e. from -2 to 12 ppm) to spectrum scale (i.e. from 0 to 16313)
+def ppm_to_idx(ppm):
+    exact_idx = (ppm + 2) * 16314 / 14
+    upper_idx = np.floor((ppm + 2.01) * 16314 / 14)
+    lower_idx = np.ceil((ppm + 1.99) * 16314 / 14)
+    return int(lower_idx), int(upper_idx)
+
+# conversion between HRMAS NMR spectrum from [0, 16313] scale to [-2 ppm, 12 ppm] scale.
+LOWER_PPM_BOUND, STEP, UPPER_PPM_BOUND = -2.0, 0.01, 12.0
+def spectrum2ppm(spectra):
+    ppm_spectra = np.zeros((spectra.shape[0], int((UPPER_PPM_BOUND - LOWER_PPM_BOUND + STEP) / STEP)))
+    for ppm in np.arange(LOWER_PPM_BOUND/STEP, (UPPER_PPM_BOUND+STEP)/STEP, 1):
+        ppm *= STEP
+        lower_idx, upper_idx = ppm_to_idx(ppm)
+        if lower_idx < 0:
+            lower_idx = 0
+        if upper_idx > 16313:
+            upper_idx = 16313
+        idx_range = range(lower_idx, upper_idx+1)
+        ppm_spectra[:, int((ppm - LOWER_PPM_BOUND) / STEP)] = np.sum(spectra[:, idx_range], axis=1)
+    return ppm_spectra
+
+
+
 # load fully quantified samples
 c_spectra = spectra_test
-with open(os.path.join(project_base_path, "data/cpmg/metabolite_names"), "rb") as f:
-    metabolite_names = pickle.load(f)
+metabolite_names = ['2-hydroxyglutarate', 'Hydroxybutyrate', 'Acetate', 'Alanine', 'Allocystathionine', 'Arginine', 'Ascorbate', 'Aspartate', 'Betaine', 'Choline', 'Creatine', 'Ethanolamine', 'GABA', 'Glutamate', 'Glutamine', 'GSH', 'Glycerophosphocholine', 'Glycine', 'Hypotaurine', 'Isoleucine', 'Lactate', 'Leucine', 'Lysine', 'Methionine', 'Myoinositol', 'NAL', 'NAA', 'O-acetylcholine', 'Ornithine', 'Phosphocholine', 'Phosphocreatine', 'Proline', 'Scylloinositol', 'Serine', 'Taurine', 'Threonine', 'Valine']
+
 
 # scale CPMG spectra with respect to reference Acetate and sample mass
 spectrum_peak_unit_quantification = 4.886210426653892e-06 / (69.6/0.0029)  
@@ -25,8 +49,7 @@ spectrum_peak_unit_quantification = 4.886210426653892e-06 / (69.6/0.0029)
 scaled_spectra = c_spectra * spectrum_peak_unit_quantification
 
 ppm_spectra = spectrum2ppm(scaled_spectra)
-ppm_spectra = np.delete(ppm_spectra,2,0)
-labels_test = np.delete(labels_test,2,1)
+
 # predict quantification per fold
 folder2dataset = {
     "2-hg": "2-hydroxyglutarate",
@@ -81,7 +104,7 @@ class Single_Metabolite_Model(nn.Module):
         return m1
 
 # Multiple Metabolite Quantification Wrapper model
-model_load_base_path = "/mnt/doruk/metabolite_quantification/glioma_quantification/cpmg/quantification/models/baseline/network_per_metabolite"
+model_load_base_path = "/mnt/gunkaynar/eretic/pathologic_classification/control_tumor/scripts/pred_quant/toy_example/network_per_metabolite"
 class QuantificationWrapper(nn.Module):
     def __init__(self, quantifiers):
         super(QuantificationWrapper, self).__init__()
@@ -127,7 +150,7 @@ class QuantificationWrapper(nn.Module):
 
         return torch.stack([q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30,q31,q32,q33,q34,q35,q36]).T
 
-pred_quant = np.zeros((41,37))
+pred_quant = np.zeros((dataset_len,37))
 # load quantifier models
 
 quantifiers = []
@@ -138,7 +161,7 @@ for name in metabolite_names:
     quantifiers[-1].eval()
 model =  QuantificationWrapper(quantifiers).to(device)
 # load fold data and quantify
-sample_ids = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]
+sample_ids = list(range(1, dataset_len))
 input = torch.from_numpy(ppm_spectra[sample_ids,:]).float().to(device)
 result = model(input).detach().cpu().numpy()
 pred_quant[sample_ids,:] = result

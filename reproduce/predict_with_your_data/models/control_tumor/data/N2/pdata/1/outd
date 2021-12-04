@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TopSpin 3.5.b.100 pl 8
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 2	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= chenggp
+$$ 2018-11-26 13:21:19.563 -0500  chenggp@14t.nmr.mgh.harvard.edu
+$$ /opt/topspin3.5.b.100pl8/data/chenggp/Nov262018_Control/24/pdata/1/outd
+$$ process /opt/topspin3.5.b.100pl8/prog/mod/edparproc
+##$CURPLOT= <>
+##$CURPRIN= <$>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/1D_X+nopp.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##END=

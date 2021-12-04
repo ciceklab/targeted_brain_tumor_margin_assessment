@@ -1,0 +1,23 @@
+##TITLE= Audit trail, TopSpin 3.5.b.100 pl 8
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= chenggp
+$$ /opt/topspin3.5.b.100pl8/data/chenggp/Oct032018_glioserum/14/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2018-10-03 11:36:07.302 -0400>,<chenggp>,<14t.nmr.mgh.harvard.edu>,<go4>,<TopSpin 3.5.b.100.8>,
+      <created by zg
+	started at 2018-10-03 11:05:23.431 -0400,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       35 E8 6B EA 00 E7 FF 20 A2 E8 1E 6B 72 5F CA 55
+       data hash MD5: 32K
+       72 D8 12 A2 D5 82 75 A3 BD 45 C0 E9 41 6A D8 A9>)
+(   2,<2018-10-03 12:08:39.898 -0400>,<chenggp>,<14t.nmr.mgh.harvard.edu>,<proc1d>,<TopSpin 3.5.b.100.8>,
+      <Start of raw data processing
+       ft FT_mod = 6 PKNL = 1 SI = 16K 
+       data hash MD5: 16K
+       53 F8 E3 6D 14 07 44 63 71 D8 79 93 02 23 26 9C>)
+##END=
+
+$$ hash MD5
+$$ 47 1E B9 CF 67 B3 E5 B1 56 7F DB 4D 34 1B 47 E4
