@@ -98,7 +98,7 @@ class Single_Metabolite_Model(nn.Module):
         return m1
 
 # Multiple Metabolite Quantification Wrapper model
-model_load_base_path = "/Users/gunkaynar/Desktop/research/targeted_brain_tumor_margin_assessment/reproduce/quantification_models"
+model_load_base_path = "/Users/gunkaynar/Desktop/research/targeted_brain_tumor_margin_assessment/reproduce/lib/quantification_models"
 class QuantificationWrapper(nn.Module):
     def __init__(self, quantifiers):
         super(QuantificationWrapper, self).__init__()
