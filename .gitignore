@@ -126,3 +126,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Repository related files
+#logs
+#data
+#models
+#plots
+#lib
+
