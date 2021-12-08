@@ -1,8 +1,8 @@
 
 
 
-path = "/mnt/gunkaynar/eretic/pathologic_classification/control_tumor/scripts/pred_quant/toy_example/"
-lib = '/mnt/gunkaynar/refactor_dataset/cpmg/lib/pyNMR'
+path = "path/to/this/folder"
+lib = 'path/to/pyNMR/folder'
 
 database = path + "data"
 model_load_base_path = path + "network_per_metabolite"
