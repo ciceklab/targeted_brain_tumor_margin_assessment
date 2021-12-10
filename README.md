@@ -21,4 +21,5 @@ The conda environment is given as **hrmas.txt** if you wish to clone the environ
 
 
 # Train with your data
- - Download the dataset from [here](https://zenodo.org/). Extract the compressed folder and move **dataset** folder to **/train_with_your_data/data** folder as a subdirectory.
+ - Download the dataset from [here](https://zenodo.org/). Extract the compressed folder and move **dataset** folder to **/train_with_your_data/cpmg/data** folder if your data consists of CPMG, or to **/train_with_your_data/eretic_cpmg/data** if your data consists of ERETIC CPMG as a subdirectory.
+ 
