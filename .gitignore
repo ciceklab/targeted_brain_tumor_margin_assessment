@@ -127,7 +127,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
+.DS_Store
 # Repository related files
 #logs
 #data
