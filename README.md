@@ -3,7 +3,7 @@
 Source code for "Targeted Metabolomics Analyses for Brain Tumor Margin Assessment During Surgery"
 
 ## Dependencies 
-The conda environment is given as **hrmas.txt** if you wish to clone the environment to your machine.
+The conda environment is given as **hrmas.yml** if you wish to clone the environment to your machine.
 - PyTorch
 - scikit-learn
 - pandas
