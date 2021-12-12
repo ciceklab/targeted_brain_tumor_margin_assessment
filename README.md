@@ -21,5 +21,7 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
 
 
 # Train with your data
- - Download the dataset from [here](https://zenodo.org/record/5774947). Extract the compressed folder and move **dataset** folder to **/train_with_your_data/data/cpmg** folder if your data consists of CPMG spectrum, or to **/train_with_your_data/data/eretic_cpmg** if your data consists of ERETIC CPMG spectrum as a subdirectory.
+ - Download the dataset from [here](https://zenodo.org/record/5774947). Extract the compressed folder and move all the contents of **cpmg_dataset** folder to **/train_with_your_data/data/cpmg** folder and move all the contents of **eretic_dataset** folder **/train_with_your_data/data/eretic_cpmg** as a subdirectory.
+ - There are 3 main trainings you may do in this repository. These are **automated metabolite quantification**, **pathologic classification** and **sample visualization**.
+
  
