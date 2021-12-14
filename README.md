@@ -3,7 +3,7 @@
 Source code for "Targeted Metabolomics Analyses for Brain Tumor Margin Assessment During Surgery"
 
 ## Dependencies 
-The conda environment is given as **hrmas.yml** if you wish to clone the environment to your machine.
+The conda environment is given as **hrmas.yml** if you wish to clone the environment to your machine. Please consider using our environment to avoid any inconvenience resulted from version differences.
 - PyTorch
 - scikit-learn
 - pandas
@@ -21,8 +21,18 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
  - You can run **/predict_with_your_data/predict.py**, and see the predictions printed out to your console.
 
 
-# Train with your data
+There are 3 main trainings you may do in this repository. These are **automated metabolite quantification**, **pathologic classification** and **sample visualization**.
+
+# Train with our dataset
  - Download the dataset from [here](https://zenodo.org/record/5774947). Extract the compressed folder and move all the contents of **cpmg_dataset** folder to **/train_with_your_data/data/cpmg** folder and move all the contents of **eretic_dataset** folder **/train_with_your_data/data/eretic_cpmg** as a subdirectory.
- - There are 3 main trainings you may do in this repository. These are **automated metabolite quantification**, **pathologic classification** and **sample visualization**.
+ - 
+ - Go to config_ult.py and .......
+ - 
+
+# Train with your data
+ - If your dataset consists of CPMG samples, move the contents of that dataset into **/train_with_your_data/data/cpmg** folder, likewise if your data consists of ERETIC-CPMG samples, move the contents of that dataset into **/train_with_your_data/data/eretic_cpmg** folder.
+ - Go to config_ult.py and .......
+ - 
+ - 
 
  
