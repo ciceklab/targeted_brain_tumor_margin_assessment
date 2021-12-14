@@ -12,8 +12,8 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
 - [PyNMR](https://github.com/bennomeier/pyNMR)
 - [shap](https://github.com/slundberg/shap)
 
-## Getting Started 
-# Predict with your data
+# Getting Started 
+## Predict with your data
  - Go to **/predict_with_your_data/config.py** and change path variable and write the path to that folder and change the lib variable to the path to pyNMR library.
  - Please run the code with the anonymous sample and see the prediction printed out.
  - Move your dataset folder to **/predict_with_your_data/data** folder.
@@ -24,13 +24,13 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
 
 There are 3 main trainings you may do in this repository. These are **automated metabolite quantification**, **pathologic classification** and **sample visualization**.
 
-# Train with our dataset
+## Train with our dataset
  - Download the dataset from [here](https://zenodo.org/record/5774947). Extract the compressed folder and move all the contents of **cpmg_dataset** folder to **/train_with_your_data/data/cpmg** folder and move all the contents of **eretic_dataset** folder **/train_with_your_data/data/eretic_cpmg** as a subdirectory.
  - 
  - Go to config_ult.py and .......
  - 
 
-# Train with your data
+## Train with your data
  - If your dataset consists of CPMG samples, move the contents of that dataset into **/train_with_your_data/data/cpmg** folder, likewise if your data consists of ERETIC-CPMG samples, move the contents of that dataset into **/train_with_your_data/data/eretic_cpmg** folder.
  - Go to config_ult.py and .......
  - 
