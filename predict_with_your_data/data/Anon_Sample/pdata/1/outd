@@ -1,0 +1,17 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.2
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 3	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= hautepierre
+$$ 2015-08-25 09:46:39.161 +0200  hautepierre@CZC33424MP
+$$ C:/Bruker/TopSpin3.2/data/Extempo Colmar/nmr/0066BPD-GBM-4/4/pdata/1/outd
+$$ process C:\Bruker\TopSpin3.2\prog\au\bin\hwcal.exe
+##$CURPLOT= <HP Officejet Pro K5400 Series>
+##$CURPRIN= <dconpeaks.txt>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/cpmg.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##$SURQMSG= 1
+##END=

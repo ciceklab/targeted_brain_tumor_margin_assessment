@@ -3,6 +3,7 @@ from config import database,lib,shift_ ,normalization_
 sys.path.insert(1, lib)
 import nmrDataMod as ndm
 import numpy as np
+import pdb
 # process free induction decay(fid) data and create a spectrum similar to Topspin's output
 def preprocess_spectrum(path):
     data = ndm.nmrData(path, "TopSpin")

@@ -1,0 +1,39 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.2
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= hautepierre
+$$ C:/Bruker/TopSpin3.2/data/Extempo Colmar/nmr/0066BPD-GBM-4/4/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2015-08-04 10:20:15.120 +0200>,<hautepierre>,<CZC33424MP>,<go>,<TOPSPIN 3.2>,
+      <created by zg
+	started at 2015-08-04 10:10:22.477 +0200,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       29 9C C9 7E C2 84 79 26 83 99 C8 82 A6 5E 9E 68
+       data hash MD5: 32K
+       76 A6 1E A9 77 75 2A 81 58 7D 89 76 AB FF 17 46>)
+(   2,<2015-08-04 10:20:37.428 +0200>,<hautepierre>,<CZC33424MP>,<proc1d>,<TOPSPIN 3.2>,
+      <Start of raw data processing
+       efp LB = 0.3 FT_mod = 6 PKNL = 1 PHC0 = -79.37083 PHC1 = 0 SI = 64K 
+       data hash MD5: 64K
+       33 C3 CE B5 F6 FF 01 85 1C 7C D9 9A 8E 3F 3F 21>)
+(   3,<2015-08-04 10:20:40.017 +0200>,<hautepierre>,<CZC33424MP>,<proc1d>,<TOPSPIN 3.2>,
+      <apk 
+       data hash MD5: 64K
+       E0 92 71 32 E0 59 AE 55 EB 0D 26 DE 69 17 F5 A0>)
+(   4,<2015-08-04 10:22:54.271 +0200>,<hautepierre>,<CZC33424MP>,<proc1d>,<TOPSPIN 3.2>,
+      <pk fgphup PHC0 = 18.65772 PHC1 = -42.6 
+       data hash MD5: 64K
+       EC 4B FD FD FC A7 B2 46 10 15 91 68 9C EF B5 40>)
+(   5,<2015-08-04 10:23:01.790 +0200>,<hautepierre>,<CZC33424MP>,<proc1d>,<TOPSPIN 3.2>,
+      <absf ABSG = 1 ABSF2 = -5 ABSF1 = 15 
+       data hash MD5: 64K
+       09 24 AE 6D D3 BE 80 BB 2C 7F E9 8E 34 CB EA 4E>)
+(   6,<2016-04-04 12:36:43.363 +0200>,<Standard>,<Standard-PC>,<proc1d>,<TOPSPIN 3.2>,
+      <bcm 0 0 65522 0.000000e+000 0.000000e+000 0.000000e+000 0.000000e+000 0.000000e+000 
+       data hash MD5: 64K
+       09 24 AE 6D D3 BE 80 BB 2C 7F E9 8E 34 CB EA 4E>)
+##END=
+
+$$ hash MD5
+$$ 4F DE 47 C9 51 18 85 89 34 19 B4 65 E1 AB 47 70

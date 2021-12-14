@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PeakList>
+  <PeakList1D>
+    <PeakList1DHeader creator="hautepierre" date="2015-08-25T09:46:38.833+02:00" expNo="4" name="0066BPD-GBM-4" owner="" procNo="1" source="C:/Bruker/TopSpin3.2/data/Extempo Colmar/nmr">
+      <PeakPickDetails>F1=1.359ppm, F2=1.331ppm, MI=50.00cm, MAXI=10000.00cm, PC=4.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="1.3371" intensity="1.000000e+002" type="0"/>
+  </PeakList1D>
+</PeakList>

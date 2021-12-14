@@ -1,7 +1,12 @@
+import pdb
+import pickle
+import pandas as pd
 import os 
 import numpy as np
+import sys
 import matplotlib.pyplot as plt
-from utils_predict import spectra_test, dataset_len
+from scipy.sparse import data
+from utils_predict import spectra_test, dataset_len, sample_ids
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -10,6 +15,7 @@ from config import model_load_base_path
 
 # convert from  a given ppm value (i.e. from -2 to 12 ppm) to spectrum scale (i.e. from 0 to 16313)
 def ppm_to_idx(ppm):
+    exact_idx = (ppm + 2) * 16314 / 14
     upper_idx = np.floor((ppm + 2.01) * 16314 / 14)
     lower_idx = np.ceil((ppm + 1.99) * 16314 / 14)
     return int(lower_idx), int(upper_idx)
@@ -148,7 +154,7 @@ pred_quant = np.zeros((dataset_len,37))
 
 quantifiers = []
 for name in metabolite_names:
-    state_dct = torch.load(os.path.join(model_load_base_path, f"{dataset2folder[name]}/seed_35/test_fold_0.pth"), map_location=device)
+    state_dct = torch.load(os.path.join(model_load_base_path, f"{dataset2folder[name]}/test_fold_0.pth"), map_location=device)
     quantifiers.append(Single_Metabolite_Model())
     quantifiers[-1].load_state_dict(state_dct)
     quantifiers[-1].eval()
@@ -162,8 +168,4 @@ pred_quant[sample_ids_num,:] = result
 # rename variables to be accessed from other scripts
 ppm_spectra_test = ppm_spectra
 quant_test = pred_quant
-plt.plot(np.max(ppm_spectra,axis=0))
-plt.xlabel("ppm")
-plt.ylabel("spectrum values")
-plt.suptitle("orange=test data, blue=train data")
-plt.savefig("a.png")
+

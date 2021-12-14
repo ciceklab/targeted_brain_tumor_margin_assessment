@@ -1,0 +1,18 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.2
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= hautepierre
+$$ C:/Bruker/TopSpin3.2/data/Extempo Colmar/nmr/0066BPD-GBM-4/4/audita.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2015-08-04 10:20:15.120 +0200>,<hautepierre>,<CZC33424MP>,<go>,<TOPSPIN 3.2>,
+      <created by zg
+	started at 2015-08-04 10:10:22.477 +0200,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       29 9C C9 7E C2 84 79 26 83 99 C8 82 A6 5E 9E 68
+       data hash MD5: 32K
+       76 A6 1E A9 77 75 2A 81 58 7D 89 76 AB FF 17 46>)
+##END=
+
+$$ hash MD5
+$$ FB B2 8B 3D 4D 3A 26 03 04 F0 F3 F7 45 DA 0D 81
