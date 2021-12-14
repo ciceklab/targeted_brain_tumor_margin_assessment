@@ -15,8 +15,8 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
 ## Getting Started 
 # Predict with your data
  - Move your dataset folder to **/predict_with_your_data/data** folder.
- - Go to **/predict_with_your_data/config.py** and change path variable and write the path to that folder. Additionally, you need to change the lib variable to path to pyNMR library.
- - If your data is aligned to acetate then you need to set **shift_** variable to 0 and **normalization_** to 1. Else, please keep **shift_** and **normalization_** variables untouched.
+ - Go to **/predict_with_your_data/config.py** and change path variable and write the path to that folder and change the lib variable to the path to pyNMR library.
+ - If your data is aligned to lactate and normalized to acetate then you need to set **shift_** variable to -1515 and **normalization_** to 1.6. Else, please keep **shift_** and **normalization_** variables untouched.
  - You can run **/predict_with_your_data/predict.py**, and see the predictions printed out to your console.
 
 
