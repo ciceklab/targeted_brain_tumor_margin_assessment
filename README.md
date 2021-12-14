@@ -19,6 +19,7 @@ The conda environment is given as **hrmas.yml** if you wish to clone the environ
  - Move your dataset folder to **/predict_with_your_data/data** folder.
  - If your data is aligned to lactate and normalized to acetate then please keep **shift_** and **normalization_** variables untouched. Else, if the alignment and normalization of your data is different than that, please change **shift_** and **normalization_** variables accordingly. We recommend -1515 and 1.6 respectively, if your data is aligned to water.
  - You can run **/predict_with_your_data/predict.py**, and see the predictions printed out to your console.
+ - The script will predict whether the samples in your dataset are of control, benign glioma or aggressive glioma tissue. You will see the predictions with their corresponding probability.
 
 
 There are 3 main trainings you may do in this repository. These are **automated metabolite quantification**, **pathologic classification** and **sample visualization**.
