@@ -4,18 +4,21 @@ import pandas as pd
 import os 
 import numpy as np
 import sys
-project_base_path = "/home/doruk/glioma_quantification/"
-current_path = "eretic/quantification/scripts/"
-sys.path.insert(1, os.path.join(project_base_path, current_path))
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+from config_u import base
+project_base_path = base
+current_path = "scripts/eretic_cpmg/pathologic_classification/"
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 
 # load fully quantified samples
-datapath_base = os.path.join(project_base_path, "data/eretic/fully_quantified/") 
+datapath_base = os.path.join(project_base_path, "data/raw_data_eretic/") 
 with open(os.path.join(datapath_base, "fully_quantified_samples_spectra"), "rb") as f:
     c_spectra = pickle.load(f)
 with open(os.path.join(datapath_base, "fully_quantified_samples_quantification"), "rb") as f:
     c_quantification = pickle.load(f)
-with open(os.path.join(project_base_path, "data/eretic/metabolite_names"), "rb") as f:
+with open(os.path.join(project_base_path, "data/raw_data_cpmg/metabolite_names"), "rb") as f:
     metabolite_names = pickle.load(f)
 c_statistics = pd.read_pickle(os.path.join(datapath_base, "fully_quantified_samples_statistics"))
 
@@ -27,11 +30,11 @@ statistics = c_statistics.iloc[invalid_pc_idx, :].reset_index(drop=True)
 spectra = c_spectra[invalid_pc_idx, :]
 quant = c_quantification[invalid_pc_idx, :]
 
-# scale eretic spectra with respect to reference Acetate and sample mass
+# scale CPMG spectra with respect to reference Acetate and sample mass
 mass = np.array(statistics["Mass"].tolist()).astype(float)
 mass_factor = np.repeat(mass.reshape(-1,1), spectra.shape[1], axis=1)
 normalized_spectra = np.divide(spectra, mass_factor)
-scaled_spectra = normalized_spectra
+scaled_spectra = normalized_spectra * spectrum_peak_unit_quantification
 
 # calculate ppm spectra
 ppm_spectra = spectrum2ppm(scaled_spectra)

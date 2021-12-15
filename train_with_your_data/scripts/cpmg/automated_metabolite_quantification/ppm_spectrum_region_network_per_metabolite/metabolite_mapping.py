@@ -2,8 +2,13 @@ import pdb
 import numpy as np 
 import pandas as pd
 import math 
+import sys
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+sys.path.insert(1,"../../../../")
 
-
+from config_u import base
 folder2dataset = {
     "2-hg": "2-hydroxyglutarate",
     "3-hb": "Hydroxybutyrate",
@@ -47,7 +52,7 @@ folder2dataset = {
 dataset2folder = {value:key for key, value in folder2dataset.items()}
 
 # find spectrum regions of all metabolites
-metabolite_database_path = "/home/doruk/glioma_quantification/data/metabolite_ppm_database_baseline.xlsx"
+metabolite_database_path = base + "/data_xlsx/metabolite_ppm_database_baseline.xlsx"
 metabolite_database = pd.read_excel(metabolite_database_path).iloc[1:,:]
 metabolite_peak_start = metabolite_database["peak start (ppm)"].tolist()
 metabolite_peak_end = metabolite_database["peak end (ppm)"].tolist()

@@ -6,7 +6,16 @@ import pdb
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+sys.path.insert(1,"../")
 sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+sys.path.insert(1,"../../../../")
+sys.path.insert(1,"../../../../../")
+sys.path.insert(1,"../../../../../../")
+sys.path.insert(1,"../../../../../../../")
+sys.path.insert(1,"../../../../../../../../")
+
+from config_u import base
 from data_generators import cpmg_generator_1A
 from load_fully_quantified_cpmg_data import fq_v_ppm_spectra, fq_v_spectra, fq_v_statistics, fq_v_quant, fq_v_class_labels, fq_v_metabolite_names, fq_v_fold_dct, SEED
 from locate_new_region import region_start, region_end
@@ -32,11 +41,10 @@ parameter_space = dict(n_estimators = n_estimators, max_depth = max_depth,
     min_samples_split = min_samples_split, min_samples_leaf = min_samples_leaf, criterion=criterion)
 
 # save and log configuration
-base = '/home/doruk/glioma_quantification/eretic/pathologic_classification/control_tumor/'
-model_name = f"baseline/new_region/seed_{SEED}/"
-model_base_path = os.path.join(base, "models/"+model_name)
-log_base_path = os.path.join(base, "logs/"+model_name)
-plot_base_path = os.path.join(base, "plots/"+model_name)
+model_name = f"uncharacterised_region/RF/seed_{SEED}/"
+model_base_path = os.path.join(base, "models/eretic_cpmg/pathologic_classification/control_tumor/raw_spectrum/"+model_name)
+log_base_path = os.path.join(base, "logs/eretic_cpmg/pathologic_classification/control_tumor/raw_spectrum/"+model_name)
+plot_base_path = os.path.join(base, "plots/eretic_cpmg/pathologic_classification/control_tumor/raw_spectrum/"+model_name)
 
 # measurement metric, shap values and timing storage 
 all_shap_values = []

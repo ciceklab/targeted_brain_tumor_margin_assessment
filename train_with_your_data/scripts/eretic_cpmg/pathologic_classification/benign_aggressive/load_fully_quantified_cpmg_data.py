@@ -4,21 +4,26 @@ import pandas as pd
 import os 
 import numpy as np
 import sys
-project_base_path = "/home/doruk/glioma_quantification/"
-current_path = "eretic/quantification/scripts/"
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+from config_u import base
+project_base_path = base
+current_path = "scripts/eretic_cpmg/pathologic_classification/"
+
 sys.path.insert(1, os.path.join(project_base_path, current_path))
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 
 
-SEED = int(input("(ERETIC) Enter Data and Weight Initialization Seed: "))
+SEED = int(input("(CPMG) Enter Data and Weight Initialization Seed: "))
 
 # load fully quantified samples
-datapath_base = os.path.join(project_base_path, "data/eretic/fully_quantified/") 
+datapath_base = os.path.join(project_base_path, "data/raw_data_eretic/") 
 with open(os.path.join(datapath_base, "fully_quantified_samples_spectra"), "rb") as f:
     c_spectra = pickle.load(f)
 with open(os.path.join(datapath_base, "fully_quantified_samples_quantification"), "rb") as f:
     c_quantification = pickle.load(f)
-with open(os.path.join(project_base_path, "data/cpmg/metabolite_names"), "rb") as f:
+with open(os.path.join(project_base_path, "data/raw_data_cpmg/metabolite_names"), "rb") as f:
     metabolite_names = pickle.load(f)
 c_statistics = pd.read_pickle(os.path.join(datapath_base, "fully_quantified_samples_statistics"))
 
@@ -67,30 +72,11 @@ for new_idx, old_idx in enumerate(non_control_indices):
 old_fold_dct = fold_dct
 fold_dct = new_fold_dct
 
-## scale eretic spectra with respect to reference Acetate 
-reference_center_idx = 14350
-region_length = 100
-reference_lower_idx = reference_center_idx - region_length
-reference_upper_idx = reference_center_idx + region_length
-
-# # Reference region unit test
-# plt.plot(spectra[:,reference_lower_idx:(reference_upper_idx+1)].mean(axis = 0))
-# plt.savefig("temp.pdf")
-# plt.close()
-
-# concentration is calculated as nmoles / mg
-reference_region_spectra = spectra[:,reference_lower_idx:(reference_upper_idx+1)]
-sum_reference_region = np.sum(reference_region_spectra, axis=1)
-solution_content = 69.6 
-spectrum_peak_unit_quantification = 1 / (sum_reference_region / solution_content)
-spectrum_peak_unit_quantification_factor = np.repeat(spectrum_peak_unit_quantification.reshape(-1,1), spectra.shape[1], axis=1)
-scaled_spectra = spectra * spectrum_peak_unit_quantification_factor
-
-# first normalize samples with respect to sample mass
+# scale CPMG spectra with respect to reference Acetate and sample mass
 mass = np.array(statistics["Mass"].tolist()).astype(float)
 mass_factor = np.repeat(mass.reshape(-1,1), spectra.shape[1], axis=1)
-normalized_spectra = np.divide(scaled_spectra, mass_factor)
-scaled_spectra = normalized_spectra
+normalized_spectra = np.divide(spectra, mass_factor)
+scaled_spectra = normalized_spectra * spectrum_peak_unit_quantification
 
 # calculate ppm spectra
 ppm_spectra = spectrum2ppm(scaled_spectra)

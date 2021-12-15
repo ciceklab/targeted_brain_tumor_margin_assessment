@@ -10,7 +10,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 from torch.utils.data import DataLoader
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
 sys.path.insert(1,"../../../")
+sys.path.insert(1,"../../../../")
+sys.path.insert(1,"../../../../../")
+
+
 from model_utils import create_data_variables, HRMASDataset_Type_B, summary, EarlyStopping, absolute_percentage_error
 from plot_loss import plot_loss
 from config import *

@@ -4,8 +4,13 @@ import pandas as pd
 import os 
 import numpy as np
 import sys
-project_base_path = "/home/doruk/glioma_quantification/"
-current_path = "eretic/quantification/scripts/"
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+from config_u import base
+project_base_path = base
+current_path = "scripts/eretic_cpmg/pathologic_classification/"
+
 sys.path.insert(1, os.path.join(project_base_path, current_path))
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 
@@ -15,15 +20,15 @@ import torch.nn.functional as F
 device = torch.device("cpu")
 
 
-SEED = int(input("(ERETIC) Enter Data and Weight Initialization Seed: "))
+SEED = int(input("(CPMG) Enter Data and Weight Initialization Seed: "))
 
 # load fully quantified samples
-datapath_base = os.path.join(project_base_path, "data/eretic/fully_quantified/") 
+datapath_base = os.path.join(project_base_path, "data/raw_data_eretic/") 
 with open(os.path.join(datapath_base, "fully_quantified_samples_spectra"), "rb") as f:
     c_spectra = pickle.load(f)
 with open(os.path.join(datapath_base, "fully_quantified_samples_quantification"), "rb") as f:
     c_quantification = pickle.load(f)
-with open(os.path.join(project_base_path, "data/cpmg/metabolite_names"), "rb") as f:
+with open(os.path.join(project_base_path, "data/raw_data_cpmg/metabolite_names"), "rb") as f:
     metabolite_names = pickle.load(f)
 c_statistics = pd.read_pickle(os.path.join(datapath_base, "fully_quantified_samples_statistics"))
 
@@ -135,7 +140,7 @@ class Single_Metabolite_Model(nn.Module):
         return m1
 
 # Multiple Metabolite Quantification Wrapper model
-model_load_base_path = "/home/doruk/glioma_quantification/eretic/quantification/models/baseline/network_per_metabolite/"
+model_load_base_path = base + "/models/eretic_cpmg/automated_metabolite_quantification/full_ppm_spectrum_network_per_metabolite/"
 class QuantificationWrapper(nn.Module):
     def __init__(self, quantifiers):
         super(QuantificationWrapper, self).__init__()

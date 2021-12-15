@@ -9,6 +9,8 @@ import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 from sklearn.linear_model import ElasticNet
 sys.path.insert(1,"../../")
+sys.path.insert(1,"../")
+
 from model_utils import create_data_variables, absolute_percentage_error
 from config import *
 

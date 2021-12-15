@@ -7,7 +7,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
 sys.path.insert(1,"../../../")
+sys.path.insert(1,"../../../../")
+sys.path.insert(1,"../../../../../")
+
+from config_u import base
 from data_generators import cpmg_generator_1A
 from load_fully_quantified_cpmg_data import fq_v_ppm_spectra, fq_v_spectra, fq_v_statistics, fq_v_quant, fq_v_class_labels, fq_v_metabolite_names, fq_v_fold_dct, SEED
 from metabolite_mapping import dataset2folder, folder2dataset, folder2spectrumregion 
@@ -31,11 +36,10 @@ K = 5
 generator = cpmg_generator_1A
 
 # save and log configuration
-base = '/home/doruk/glioma_quantification/cpmg/quantification/'
-model_name = f"baseline/spectrum_region_network_per_metabolite/{task}/seed_{SEED}/" ############
-model_base_path = os.path.join(base, "models/"+model_name)
-log_base_path = os.path.join(base, "logs/"+model_name)
-plot_base_path = os.path.join(base, "plots/"+model_name)
+model_name = f"raw_spectrum_region_network_per_metabolite/{task}/seed_{SEED}/"
+model_base_path = os.path.join(base, "models/cpmg/automated_metabolite_quantification/"+model_name)
+log_base_path = os.path.join(base, "logs/cpmg/automated_metabolite_quantification/"+model_name)
+plot_base_path = os.path.join(base, "plots/cpmg/automated_metabolite_quantification/"+model_name)
 
 # neural network model configuration
 num_epochs = 2000

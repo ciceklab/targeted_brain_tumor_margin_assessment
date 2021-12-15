@@ -19,6 +19,8 @@ from feature_importance import plot_all_shap_spectrum, sort_shap_values
 sys.path.insert(1,"../../../")
 from model_utils import create_data_variables
 
+important_features = []
+
 # cross validation loop
 process_start = time.time()
 for fold_id, (train_idx, vald_idx, test_idx, train_data, vald_data, test_data, all_data) in enumerate(generator(K, fold_dct, statistics, spectra, ppm_spectra, pred_quant, class_labels)):
@@ -81,6 +83,8 @@ for fold_id, (train_idx, vald_idx, test_idx, train_data, vald_data, test_data, a
     train_data["X"] = train_data["X"][:,high_shap_indices]
     vald_data["X"] = vald_data["X"][:,high_shap_indices]
     test_data["X"] =  test_data["X"][:,high_shap_indices]
+
+    important_features.append(high_shap_indices.tolist())
 
     # perform grid search on the new inputs
     cv_X = np.concatenate((train_data["X"], vald_data["X"]), axis=0)
@@ -160,3 +164,5 @@ with open(os.path.join(log_base_path, "train_time.txt"), "w") as f:
 with open(os.path.join(log_base_path, "test_time.txt"), "w") as f:
     for t in runtime["test"]:
         f.write("%f\n" % t)
+with open(os.path.join(log_base_path, "important_features.txt"), "wb") as f:
+    pickle.dump(important_features, f)

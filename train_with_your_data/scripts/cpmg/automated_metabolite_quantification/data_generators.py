@@ -4,8 +4,12 @@ import pandas as pd
 import os 
 import numpy as np
 import sys
-project_base_path = "/home/doruk/glioma_quantification/"
-current_path = "cpmg/quantification/scripts/"
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+from config_u import base
+project_base_path = base
+current_path = "scripts/cpmg/automated_metabolite_quantification/"
 sys.path.insert(1, os.path.join(project_base_path, current_path))
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 ''' Custom data generator functions for fold generation with no patient and sample overlap'''

@@ -5,7 +5,7 @@ import os
 import numpy as np
 import sys
 project_base_path = "/home/cicek/doruk/glioma_quantification/"
-current_path = "eretic/quantification/scripts/"
+current_path = "cpmg/quantification/scripts/"
 sys.path.insert(1, os.path.join(project_base_path, current_path))
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 ''' Custom data generator functions for fold generation with no patient and sample overlap'''

@@ -4,8 +4,13 @@ import pandas as pd
 import os 
 import numpy as np
 import sys
-project_base_path = "/home/doruk/glioma_quantification/"
-current_path = "cpmg/quantification/scripts/"
+sys.path.insert(1,"../")
+sys.path.insert(1,"../../")
+sys.path.insert(1,"../../../")
+from config_u import base
+project_base_path = base
+current_path = "scripts/cpmg/pathologic_classification/"
+
 sys.path.insert(1, os.path.join(project_base_path, current_path))
 from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantification
 
@@ -13,12 +18,12 @@ from data_utils import split_to_kfold, spectrum2ppm, spectrum_peak_unit_quantifi
 SEED = int(input("(CPMG) Enter Data and Weight Initialization Seed: "))
 
 # load fully quantified samples
-datapath_base = os.path.join(project_base_path, "data/cpmg/fully_quantified/") 
+datapath_base = os.path.join(project_base_path, "data/raw_data_cpmg/") 
 with open(os.path.join(datapath_base, "fully_quantified_samples_spectra"), "rb") as f:
     c_spectra = pickle.load(f)
 with open(os.path.join(datapath_base, "fully_quantified_samples_quantification"), "rb") as f:
     c_quantification = pickle.load(f)
-with open(os.path.join(project_base_path, "data/cpmg/metabolite_names"), "rb") as f:
+with open(os.path.join(project_base_path, "data/raw_data_cpmg/metabolite_names"), "rb") as f:
     metabolite_names = pickle.load(f)
 c_statistics = pd.read_pickle(os.path.join(datapath_base, "fully_quantified_samples_statistics"))
 
@@ -43,11 +48,29 @@ quant = valid_quant[task_based_sample_indices, :]
 fold_dct, class_labels = split_to_kfold(spectra, statistics, "benign_aggressive", k=5, seed=SEED)
 class_labels = np.array(class_labels).reshape(-1,1)
 
-# convert benign aggressive class labels to control tumor classes
-# currently: "benign": 0, "aggressive":1, "control":2
-class_labels[class_labels == 0] = 1
-class_labels[class_labels == 2] = 0
-# result: "benign" and "aggressive": 1 and "control":0
+# discard control
+non_control_indices = list(np.where(class_labels == 1)[0]) + list(np.where(class_labels == 0)[0])
+control_indices = list(np.where(class_labels == 2)[0])
+statistics = statistics.iloc[non_control_indices, :].reset_index(drop=True)
+spectra = spectra[non_control_indices, :]
+quant = quant[non_control_indices, :]
+class_labels = class_labels[non_control_indices]
+
+# remove control samples from folds
+for key in fold_dct.keys():
+    samples = set(fold_dct[key])
+    samples = samples.difference(control_indices)
+    fold_dct[key] = list(samples)
+
+# map indices to old position
+new_fold_dct = {"0":[], "1":[], "2":[], "3":[], "4":[]}
+for new_idx, old_idx in enumerate(non_control_indices):
+    for key in fold_dct.keys():
+        if old_idx in fold_dct[key]:
+            new_fold_dct[key].append(new_idx)
+            break
+old_fold_dct = fold_dct
+fold_dct = new_fold_dct
 
 # scale CPMG spectra with respect to reference Acetate and sample mass
 mass = np.array(statistics["Mass"].tolist()).astype(float)
