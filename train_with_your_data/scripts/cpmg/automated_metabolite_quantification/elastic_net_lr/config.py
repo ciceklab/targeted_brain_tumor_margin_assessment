@@ -14,7 +14,7 @@ from load_fully_quantified_cpmg_data import fq_v_ppm_spectra, fq_v_spectra, fq_v
 
 # data configuration
 ppm_spectra = fq_v_ppm_spectra
-spectra = fq_v_spectra
+spectra = np.hstack((np.ones((500,1)),fq_v_spectra))
 statistics = fq_v_statistics
 quant = fq_v_quant
 class_labels = fq_v_class_labels
